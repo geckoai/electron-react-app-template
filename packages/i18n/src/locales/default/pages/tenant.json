@@ -1,0 +1,18 @@
+{
+  "TITLE": "租户管理",
+  "ID": "#",
+  "STATUS": "状态",
+  "NAME": "名称",
+  "UPDATE_TIME": "更新时间",
+  "CREATE_TIME": "更新时间",
+  "DESCRIPTION": "描述",
+  "OWN_TENANT_ID": "所属租户",
+  "VERSION": "版本号",
+  "ADDRESS": "地址",
+  "COMPANY_ID": "客户Id",
+  "COMPANY_NAME": "客户名称",
+  "COMPANY_NO": "客户编号",
+  "LICENSE_NUMBER": "授权的许可数量",
+  "PHONE": "联系电话",
+  "SORT_NO": "显示编号"
+}

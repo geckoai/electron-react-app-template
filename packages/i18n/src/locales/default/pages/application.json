@@ -1,0 +1,10 @@
+{
+  "TITLE": "应用管理",
+  "STATUS":"状态",
+  "APPLICATION_TYPE":"应用类型",
+  "APPLICATION_NAME":"应用名称",
+  "APPLICATION_ID":"应用ID",
+  "VIEW_APP_SECRET": "查看App Secret",
+  "CREATE_APP_SECRET": "生成App Secret",
+  "TENANT_ID": "租户ID"
+}

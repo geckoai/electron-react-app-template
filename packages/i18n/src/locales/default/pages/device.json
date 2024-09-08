@@ -1,0 +1,14 @@
+{
+  "TERMINAL_TYPE": "登陆终端类型",
+  "TERMINAL_ACCOUNT": "终端账户",
+  "THIRD_PARTY_PLATFORM_ACCOUNT": "第三方平台账户",
+  "APPLICATION_SYSTEM_ACCOUNT": "应用系统账户",
+  "APPLICATION_NAME": "应用名称",
+  "DEVICE_LIST": "设备列表",
+  "USER_DEVICE_ID": "用户设备ID",
+  "ROLE_ID": "角色",
+  "TYPE": "账户设备类型",
+  "PLATFORM":"授权登陆平台",
+  "INHERIT_MAIN_ACCOUNT":"是否继承主账户",
+  "STATUS": "状态"
+}

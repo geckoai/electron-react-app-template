@@ -1,0 +1,18 @@
+{
+  "name": "@packages/components",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/geckoai/react-app-template.git"
+  },
+  "dependencies": {
+    "antd": "5.19.3",
+    "@ctrl/tinycolor": "4.1.0"
+  },
+  "private": true
+}
