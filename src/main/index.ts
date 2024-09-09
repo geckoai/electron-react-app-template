@@ -1,5 +1,6 @@
 import { app, BrowserWindow } from 'electron';
 import { winURL } from './util';
+import path from 'path';
 
 // Menu.setApplicationMenu(null);、
 
@@ -18,11 +19,14 @@ function createWindow() {
       // 此设置运行渲染进程 使用node Api
       nodeIntegration: true,
       contextIsolation: false,
-      devTools: true,
     },
   });
 
-  mainWindow.loadURL(winURL);
+  if (process.env.NODE_ENV === 'development') {
+    mainWindow.loadURL(winURL);
+  } else {
+    mainWindow.loadFile(path.join(__dirname, '..', 'renderer', 'index.html'));
+  }
 
   mainWindow.on('closed', () => {
     mainWindow = null;
@@ -38,7 +42,7 @@ function createWindow() {
   mainWindow.flashFrame(true);
 }
 
-app.on('ready', createWindow);
+app.whenReady().then(createWindow);
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
@@ -46,8 +50,8 @@ app.on('window-all-closed', () => {
   }
 });
 
-app.on('activate', () => {
-  if (mainWindow === null) {
-    createWindow();
-  }
-});
+// app.on('activate', () => {
+//   if (mainWindow === null) {
+//     createWindow();
+//   }
+// });
