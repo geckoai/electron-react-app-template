@@ -2,7 +2,9 @@ import { app, BrowserWindow } from 'electron';
 import { winURL } from './util';
 import path from 'path';
 
-// Menu.setApplicationMenu(null);、
+// Menu.setApplicationMenu(null);
+
+// var a: number = '1';
 
 let mainWindow: BrowserWindow | null;
 

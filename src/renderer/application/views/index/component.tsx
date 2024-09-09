@@ -1,3 +1,7 @@
 export const Component = () => {
-  return <div style={{ background: 'red' }}>Index111222</div>;
+  return (
+    <div style={{ background: 'red', width: '100vw', height: '100vh' }}>
+      333
+    </div>
+  );
 };

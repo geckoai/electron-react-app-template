@@ -1,17 +1,7 @@
 /// <reference types="@types/node" />
 /// <reference types="@types/react" />
 /// <reference types="@types/react-dom" />
-
-namespace NodeJS {
-  interface Process {
-    env: ProcessEnv;
-  }
-  interface ProcessEnv {
-    readonly NODE_ENV: 'development' | 'production' | 'test';
-    readonly PUBLIC_URL: string;
-  }
-}
-var process: NodeJS.Process;
+/// <reference types="@geckoai/electron-react-scripts/src/react-app" />
 
 interface Window {
   WAVES(ops: {

@@ -24,6 +24,6 @@
   "typeAcquisition": {
     "enable": false
   },
-  "include": ["packages", "src/main", "src/renderer"],
+  "include": ["packages"],
   "exclude": ["apis"]
 }
