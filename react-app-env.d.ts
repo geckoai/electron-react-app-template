@@ -1,28 +1,21 @@
 /// <reference types="@types/node" />
 /// <reference types="@types/react" />
 /// <reference types="@types/react-dom" />
-/// <reference types="@geckoai/electron-react-scripts/src/react-app" />
 
-interface Window {
-  WAVES(ops: {
-    color: number;
-    el: HTMLDivElement;
-    gyroControls: boolean;
-    scale: number;
-    minWidth: number;
-    zoom: number;
-    waveSpeed: number;
-    waveHeight: number;
-    minHeight: number;
-    shininess: number;
-    mouseControls: boolean;
-    scaleMobile: number;
-    touchControls: boolean
-  }): VantaEffect<EffectWavesOps>;
+namespace NodeJS {
+  declare interface Process {
+    env: ProcessEnv;
+  }
+  interface ProcessEnv {
+    NODE_ENV: 'development' | 'production';
+    PUBLIC_URL: string;
+    WDS_SOCKET_HOST: string;
+    WDS_SOCKET_PORT: string;
+    WDS_SOCKET_PATH: string;
+    APP_RUNTIME_ENV:  number;
+    MAX_OLD_SPACE_SIZE: string;
+  }
 }
-
-var window: Window & typeof globalThis;
-
 
 declare module '*.avif' {
   const src: string;

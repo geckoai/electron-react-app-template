@@ -18,12 +18,10 @@
     "resolveJsonModule": true,
     "isolatedModules": false,
     "noEmit": true,
-    "jsx": "react-jsx",
-    "typeRoots": ["src"]
+    "jsx": "react-jsx"
   },
   "typeAcquisition": {
     "enable": false
   },
-  "include": ["packages"],
   "exclude": ["apis"]
 }
