@@ -1,0 +1,31 @@
+{
+  "ignorePatterns": ["dist", "*.js", "*.d.ts"],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["prettier"],
+  "extends": ["react-app"],
+  "rules": {
+    "prettier/prettier": [
+      "error",
+      {
+        "singleQuote": true,
+        "endOfLine": "auto"
+      },
+      {
+        "usePrettierrc": false
+      }
+    ],
+    "jsx-quotes": ["error", "prefer-double"],
+    "semi": ["warn", "always"],
+    "curly": "warn",
+    "lines-between-class-members": "error",
+    "react/no-children-prop": "off",
+    "no-lone-blocks": "error",
+    "no-unused-vars": "error",
+    "@typescript-eslint/no-unused-vars": "off",
+    "no-unused-expressions": "error",
+    "no-unused-labels": "error",
+    "import/no-anonymous-default-export": "off",
+    "@typescript-eslint/no-redeclare": "off",
+    "no-redeclare": "off"
+  }
+}

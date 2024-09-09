@@ -1,0 +1,19 @@
+{
+  "name": "@packages/hooks",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/geckoai/react-app-template.git"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-router-dom": "^6.22.3",
+    "@packages/router": "workspace:*"
+  },
+  "private": true
+}
