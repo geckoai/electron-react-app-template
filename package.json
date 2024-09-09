@@ -1,12 +1,13 @@
 {
   "name": "electron-react-template",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "",
   "main": "./node_modules/.electron/main.js",
   "scripts": {
-    "start": "react-scripts start",
-    "swagger": "react-scripts swagger-generator",
-    "build": "react-scripts build && electron-builder",
+    "start": "electron-react-scripts start",
+    "create": "electron-react-scripts create test-app",
+    "swagger": "electron-react-scripts swagger-generator",
+    "build": "electron-react-scripts build && electron-builder",
     "electron-builder": "electron-builder",
     "postinstall": "electron-builder install-app-deps",
     "crowdin:upload": "crowdin upload sources --auto-update --config ./crowdin.yaml",
@@ -66,7 +67,7 @@
   "devDependencies": {
     "@types/node": "20.16.5",
     "@crowdin/cli": "^3.19.4",
-    "@geckoai/electron-react-scripts":  "workspace:*",
+    "@geckoai/electron-react-scripts": "workspace:*",
     "@types/crypto-js": "^4.2.2",
     "@types/react": "^18.2.70",
     "@types/react-dom": "^18.2.22",
