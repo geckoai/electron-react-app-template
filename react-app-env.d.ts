@@ -12,7 +12,7 @@ namespace NodeJS {
     WDS_SOCKET_HOST: string;
     WDS_SOCKET_PORT: string;
     WDS_SOCKET_PATH: string;
-    APP_RUNTIME_ENV:  number;
+    APP_RUNTIME_ENV:  'web' | 'electron';
     MAX_OLD_SPACE_SIZE: string;
   }
 }
