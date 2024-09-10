@@ -29,11 +29,6 @@ module.exports = {
           },
           javascriptEnabled: true,
         },
-        /**
-         * StylelintWebpackPlugin options
-         * see: https://webpack.js.org/plugins/stylelint-webpack-plugin/#options
-         */
-        lint: null
       },
       /**
        * sass-loader options
@@ -60,6 +55,11 @@ module.exports = {
           // ]
         },
       },
+      /**
+       * StylelintWebpackPlugin options
+       * see: https://webpack.js.org/plugins/stylelint-webpack-plugin/#options
+       */
+      lint: null
     },
     /**
      * babel-loader options
