@@ -1,11 +1,10 @@
 {
   "name": "electron-react-template",
-  "version": "1.0.2",
+  "version": "1.0.0",
   "description": "",
-  "main": "./node_modules/.electron/main.js",
+  "main": "./dist/main/main.js",
   "scripts": {
     "start": "electron-react-scripts start",
-    "create": "electron-react-scripts create test-app",
     "swagger": "electron-react-scripts swagger-generator",
     "build": "electron-react-scripts build && electron-builder",
     "electron-builder": "electron-builder",
