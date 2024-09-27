@@ -3,17 +3,19 @@
 /// <reference types="@types/react-dom" />
 
 namespace NodeJS {
-  declare interface Process {
+  interface Process {
     env: ProcessEnv;
   }
   interface ProcessEnv {
     NODE_ENV: 'development' | 'production';
     PUBLIC_URL: string;
+    API_URL: string;
     WDS_SOCKET_HOST: string;
     WDS_SOCKET_PORT: string;
     WDS_SOCKET_PATH: string;
     APP_RUNTIME_ENV:  'web' | 'electron';
     MAX_OLD_SPACE_SIZE: string;
+    RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED: boolean
   }
 }
 
@@ -72,8 +74,6 @@ declare module '*.module.sass' {
   export default classes;
 }
 
-declare type NullLike<T> = null | T;
-
 declare module '*.svg' {
   import * as React from 'react';
 
@@ -83,51 +83,4 @@ declare module '*.svg' {
 
   const src: string;
   export default src;
-}
-
-declare interface BPMNContextPadProvider {
-  $inject: string[];
-}
-
-declare interface BPMNModule {
-  contextPadProvider: [string, BPMNContextPadProvider];
-}
-
-declare module 'bpmn-js-embedded-comments' {
-  declare var m: BPMNModule;
-  export default m;
-}
-
-declare module 'diagram-js-minimap' {
-  declare var m: BPMNModule;
-  export default m;
-}
-
-declare module 'camunda-transaction-boundaries' {
-  declare var m: BPMNModule;
-  export default m;
-}
-
-declare module 'bpmn-js-color-picker' {
-  declare var m: BPMNModule;
-  export default m;
-}
-
-declare module 'bpmn-js-properties-panel' {
-  export var BpmnPropertiesPanelModule: BPMNModule;
-  export var BpmnPropertiesProviderModule: BPMNModule;
-  export var CamundaPlatformPropertiesProviderModule: BPMNModule;
-  export var ZeebePropertiesProviderModule: BPMNModule;
-
-  export default {
-    BpmnPropertiesPanelModule,
-    BpmnPropertiesProviderModule,
-    CamundaPlatformPropertiesProviderModule,
-    ZeebePropertiesProviderModule,
-  };
-}
-
-declare module 'react-color' {
-  import { FC } from 'react';
-  export const SketchPicker: FC<any>;
 }
