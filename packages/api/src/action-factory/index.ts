@@ -3,8 +3,8 @@ import { useActionData } from 'react-router-dom';
 import { AxiosResponse } from 'axios';
 import { HttpException } from '@geckoai/http';
 import { ActionFunctionArgs } from '@remix-run/router/utils';
-// import { UCenterAPI } from '@packages/u-center-api';
-import { transformer } from '../transformer';
+import { API } from '../http';
+import { transformer } from '@packages/utils';
 
 abstract class Action<R extends {}> {
   protected constructor(private target: ClassConstructor) {}
@@ -22,15 +22,13 @@ export class ActionFactory {
       useActionData,
       async action({ request, params }) {
         try {
-          // const json = await request.json();
-          // return (await UCenterAPI.fetch(
-          //   transformer.transform(target, {
-          //     ...params,
-          //     ...json,
-          //   })
-          // )) as AxiosResponse<R>;
-
-          throw new Error('Method not implemented');
+          const json = await request.json();
+          return (await API.fetch(
+            transformer.transform(target, {
+              ...params,
+              ...json,
+            })
+          )) as AxiosResponse<R>;
         } catch (e) {
           if (e instanceof HttpException) {
             return null;

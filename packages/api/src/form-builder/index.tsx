@@ -10,10 +10,9 @@ import {
   ModalProps,
   Row,
   Space,
-} from 'antd';
-import * as React from 'react';
+} from '@packages/components';
+
 import {
-  Children,
   cloneElement,
   Component,
   createContext,
@@ -22,16 +21,18 @@ import {
   useContext,
   useMemo,
   useState,
+  Children,
 } from 'react';
 import { ApiPropertyDecorate, ApiPropertyMetadataImpl } from '@geckoai/http';
 import { Rule, TypedDecorate, TypeMirror } from '@geckoai/class-transformer';
-import { FormListFieldData, FormListProps } from 'antd/es/form/FormList';
-import { LocaleLanguageKey } from '@geckoai/http/dist/types/constants';
-import { ActionFunctionArgs } from '@remix-run/router/utils';
+import type { FormListFieldData, FormListProps } from 'antd/es/form/FormList';
+import type { LocaleLanguageKey } from '@geckoai/http/dist/types/constants';
+import type { ActionFunctionArgs } from '@remix-run/router/utils';
 import { AxiosResponse } from 'axios';
-import { transformer } from '../transformer';
 import { useActionData, useSubmit } from 'react-router-dom';
-import i18n from '@packages/i18n';
+import { i18n } from '@packages/i18n';
+import { transformer } from '@packages/utils';
+import { API } from '../http';
 
 export const FormBuilderContext = createContext<BaseBuilder<any, any> | null>(
   null
@@ -133,24 +134,22 @@ abstract class BaseBuilder<T extends {}, P extends {} = any> {
   }
 
   public getAction<R extends { code: string; message: string }>() {
-    // const { target } = this;
+    const { target } = this;
     return {
       useActionData,
       async action({ request, params }) {
         try {
-          // const json = await request.json();
-          // return (await UCenterAPI.fetch(
-          //   transformer.transform(target.type(), {
-          //     ...params,
-          //     ...json,
-          //   })
-          // )) as AxiosResponse<R>;
-          throw new Error('Method not implemented');
+          const json = await request.json();
+          return (await API.fetch(
+            transformer.transform(target.type(), {
+              ...params,
+              ...json,
+            })
+          )) as AxiosResponse<R>;
         } catch (e) {
+          console.log(e);
           throw e;
         }
-
-        return {} as AxiosResponse<R>;
       },
     } as Action<R>;
   }
@@ -165,9 +164,10 @@ type DepPartial<T> = {
 export type BuildForm<T> = ((
   props: Omit<
     FormProps<T>,
-    'initialValues' | 'action' | 'encType' | 'method'
+    'initialValues' | 'action' | 'encType' | 'method' | 'onFinish'
   > & {
     initialValues?: DepPartial<T>;
+    onFinish?: (args: T, submit: (value: T) => void) => void;
   }
 ) => React.ReactElement) & {
   Item: FC<
@@ -211,11 +211,7 @@ export class FormBuilder<T extends {}> extends BaseBuilder<T> {
   }
 
   public build(action: string = ''): BuildForm<T> {
-    const fc: BuildForm<T> = (
-      props: Omit<FormProps<T>, 'initialValues'> & {
-        initialValues?: DepPartial<T>;
-      }
-    ) => {
+    const fc: BuildForm<T> = (props) => {
       const { onFinish, ...rest } = props as any;
       // eslint-disable-next-line react-hooks/rules-of-hooks
       const submit = useSubmit();
@@ -224,12 +220,20 @@ export class FormBuilder<T extends {}> extends BaseBuilder<T> {
           <Form
             {...(rest as any)}
             onFinishFailed={(e) => {
-              console.warn(e);
               props.onFinishFailed?.(e);
             }}
             onFinish={(values) => {
               if (props.onFinish) {
-                props.onFinish?.(values);
+                props.onFinish?.(
+                  transformer.transform(this.target, values),
+                  (args: any) => {
+                    submit(args, {
+                      action,
+                      encType: 'application/json',
+                      method: 'post',
+                    });
+                  }
+                );
               } else {
                 submit(values, {
                   action,
@@ -287,21 +291,17 @@ export class FormBuilder<T extends {}> extends BaseBuilder<T> {
             {...formPropsRest}
             initialValues={initialValues}
             onFinish={async (values) => {
-              formProps?.onFinish?.(values);
+              if (formProps?.onFinish) {
+                formProps?.onFinish?.(values);
+                return;
+              }
               try {
                 const data = (await onRequest?.(values)) ?? values;
                 setLoading(true);
-                console.log(data, 'data');
-                console.log(
-                  transformer.transform(this.target.type(), data),
-                  'transform data'
+                const res = await API.fetch(
+                  transformer.transform(this.target.type(), data)
                 );
-                // const res = await UCenterAPI.fetch(
-                //   transformer.transform(this.target.type(), data)
-                // );
-                // await onResponse?.(res);
-
-                throw new Error('Method not implemented');
+                await onResponse?.(res as any);
               } catch (err) {
                 await onRequestFailed?.(err);
               } finally {
@@ -402,6 +402,7 @@ export class FormItemBuilder<
   ) {
     const { parent, propertyKey } = this;
     const metadata = parent?.getMetadata(propertyKey);
+
     const _this = this;
     return (
       props: Omit<FormItemProps, 'initialValue' | 'name'> & {
@@ -410,9 +411,15 @@ export class FormItemBuilder<
         initialValue?: P[K];
         // 在FormList中使用时必传
         fieldIndex?: string | number;
+        placeholder?: string;
       }
     ) => {
-      const { buildLabel = true, children, fieldIndex, ...rest } = props;
+      const {
+        buildLabel = true,
+        buildPlaceholder = true,
+        fieldIndex,
+        ...rest
+      } = props;
       const context = useContext(FormBuilderContext);
       const locale = useContext(FormLocaleContext);
 
@@ -445,26 +452,34 @@ export class FormItemBuilder<
         rest.rules.push({ required: false });
       }
 
-      if (buildLabel && metadata?.locales?.[locale]) {
-        rest.label = metadata.locales[locale];
+      const lc = metadata?.locales?.[locale];
+
+      if (lc) {
+        if (buildLabel) {
+          rest.label = lc;
+        }
+
+        if (buildPlaceholder) {
+          rest.placeholder = lc;
+        }
+      }
+
+      if (rest.children) {
+        if (typeof rest.children !== 'function') {
+          rest.children = cloneElement(Children.only(rest.children) as any, {
+            placeholder: rest.placeholder,
+          });
+        }
+      } else if (element) {
+        rest.children = createElement(element as any, {
+          placeholder: rest.placeholder,
+          ...elementProps,
+        });
       }
 
       return (
         <FormBuilderContext.Provider value={this}>
-          <Form.Item
-            {...rest}
-            name={namePath}
-            children={
-              element
-                ? createElement(element as any, {
-                    ...elementProps,
-                    placeholder: rest.label,
-                  })
-                : cloneElement(Children.only(children) as any, {
-                    placeholder: rest.label,
-                  })
-            }
-          />
+          <Form.Item {...rest} name={namePath} />
         </FormBuilderContext.Provider>
       );
     };

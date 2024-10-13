@@ -1,4 +1,4 @@
-import { createMemoryRouter } from 'react-router-dom';
+import { createMemoryRouter, createBrowserRouter } from 'react-router-dom';
 import { ClassConstructor, ClassMirror } from '@geckoai/class-mirror';
 import { ModuleDecorate } from './module';
 import { IndexRoute, NoIndexRoute } from './route';
@@ -27,8 +27,22 @@ export class RouterFactory {
           },
           parent
         );
+        let noIndexRouteAlisa: NoIndexRoute;
+        if (rest.alias) {
+          noIndexRouteAlisa = NoIndexRoute.create(
+            {
+              ...rest,
+              path: rest.alias,
+              children: [],
+            },
+            parent
+          );
+        }
         children?.forEach((o) => {
           RouterFactory.reflect(o, noIndexRoute);
+          if (noIndexRouteAlisa) {
+            RouterFactory.reflect(o, noIndexRouteAlisa);
+          }
         });
       }
     });
@@ -37,6 +51,12 @@ export class RouterFactory {
   public static create(target: ClassConstructor) {
     const root = NoIndexRoute.create({ path: '', children: [] });
     RouterFactory.reflect(target, root);
+    if (
+      process.env.APP_RUNTIME_ENV === 'web' ||
+      process.env.NODE_ENV === 'development'
+    ) {
+      return createBrowserRouter([root], {});
+    }
     return createMemoryRouter([root], {});
   }
 }

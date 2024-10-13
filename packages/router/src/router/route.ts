@@ -6,6 +6,7 @@ import * as React from 'react';
 import { RouteObject } from 'react-router/dist/lib/context';
 import { ErrorBoundary } from './ErrorBoundary';
 import { AntdIconProps } from '@ant-design/icons/lib/components/AntdIcon';
+import { DepLocale } from '@packages/i18n';
 
 class Route {
   public caseSensitive?: AgnosticIndexRouteObject['caseSensitive'];
@@ -46,7 +47,7 @@ class Route {
 
   public isHideInMenu?: boolean;
 
-  public title?: Record<string, any>;
+  public title?: DepLocale<{ TITLE: string }>;
 
   public fullPath: string;
 
@@ -79,7 +80,7 @@ class Route {
     this.title = route.title;
     this.icon = route.icon;
     this.alias = route.alias;
-    this.fullPath = this.getFullPath().join('').replace(/\/+/, '/');
+    this.fullPath = this.getFullPath().join('/').replace(/\/+/g, '/');
     parent?.children?.push(this);
   }
 }
