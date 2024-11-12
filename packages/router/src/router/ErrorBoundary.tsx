@@ -1,7 +1,10 @@
-import { Button, Modal, Result } from '@packages/components';
+import { Button, Result } from '@packages/components';
 import { useNavigate, useRouteError } from 'react-router-dom';
 import { useContext } from 'react';
 import { I18nContext } from '@packages/i18n';
+
+import NOTFOUND from '../assets/404.svg';
+import QUESTION from '../assets/question.svg';
 
 export function ErrorBoundary() {
   const navigate = useNavigate();
@@ -9,31 +12,25 @@ export function ErrorBoundary() {
   const error = useRouteError() as any;
 
   if (error?.constructor?.name === 'ErrorResponseImpl') {
-    const { data, status, statusText } = error;
+    const { status, statusText } = error;
     return (
       <Result
-        status="500"
+        status="error"
         title={status}
+        icon={
+          <img alt="not_found" src={status === 404 ? NOTFOUND : QUESTION} />
+        }
         subTitle={statusText}
         extra={[
           <Button
+            key="CUSTOMER_SERVICE"
             children={locale.UI.CUSTOMER_SERVICE}
             onClick={() => navigate('/', { replace: true })}
           />,
           <Button
-            hidden={process.env.NODE_ENV !== 'development'}
-            children={locale.UI.VIEW_ERROR_MESSAGE}
+            key="BACK_HOME"
             type="primary"
-            danger
-            onClick={() =>
-              Modal.error({
-                content: data,
-              })
-            }
-          />,
-          <Button
-            type="primary"
-            children={locale.UI.RE_LOGIN}
+            children={locale.UI.BACK_HOME}
             onClick={() => navigate('/', { replace: true })}
           />,
         ]}
@@ -42,31 +39,25 @@ export function ErrorBoundary() {
   }
 
   if (error.isAxiosError) {
-    const { data } = error.response;
+    const { data, status, message } = error.response;
     return (
       <Result
         status="error"
-        title={data?.code}
-        subTitle={data?.message}
+        title={status}
+        subTitle={message ?? data?.message ?? error.message}
+        icon={
+          <img alt="not_found" src={status === 404 ? NOTFOUND : QUESTION} />
+        }
         extra={[
           <Button
+            key="CUSTOMER_SERVICE"
             children={locale.UI.CUSTOMER_SERVICE}
             onClick={() => navigate('/', { replace: true })}
           />,
           <Button
+            key="BACK_HOME"
             type="primary"
-            danger
-            hidden={process.env.NODE_ENV !== 'development'}
-            children={locale.UI.VIEW_ERROR_MESSAGE}
-            onClick={() =>
-              Modal.error({
-                content: error?.stack,
-              })
-            }
-          />,
-          <Button
-            type="primary"
-            children={locale.UI.RE_LOGIN}
+            children={locale.UI.BACK_HOME}
             onClick={() => navigate('/', { replace: true })}
           />,
         ]}
@@ -80,25 +71,22 @@ export function ErrorBoundary() {
         status={error?.status || 'error'}
         title={error?.statusText}
         subTitle={error?.data}
+        icon={
+          <img
+            alt="not_found"
+            src={error.status === 404 ? NOTFOUND : QUESTION}
+          />
+        }
         extra={[
           <Button
+            key="CUSTOMER_SERVICE"
             children={locale.UI.CUSTOMER_SERVICE}
             onClick={() => navigate('/', { replace: true })}
           />,
           <Button
+            key="BACK_HOME"
             type="primary"
-            danger
-            hidden={process.env.NODE_ENV !== 'development'}
-            children={locale.UI.VIEW_ERROR_MESSAGE}
-            onClick={() =>
-              Modal.error({
-                content: error?.error?.stack,
-              })
-            }
-          />,
-          <Button
-            type="primary"
-            children={locale.UI.RE_LOGIN}
+            children={locale.UI.BACK_HOME}
             onClick={() => navigate('/', { replace: true })}
           />,
         ]}
@@ -113,23 +101,14 @@ export function ErrorBoundary() {
       subTitle={error.message}
       extra={[
         <Button
+          key="CUSTOMER_SERVICE"
           children={locale.UI.CUSTOMER_SERVICE}
           onClick={() => navigate('/', { replace: true })}
         />,
         <Button
+          key="BACK_HOME"
           type="primary"
-          danger
-          hidden={process.env.NODE_ENV !== 'development'}
-          children={locale.UI.VIEW_ERROR_MESSAGE}
-          onClick={() =>
-            Modal.error({
-              content: error?.stack,
-            })
-          }
-        />,
-        <Button
-          type="primary"
-          children={locale.UI.RE_LOGIN}
+          children={locale.UI.BACK_HOME}
           onClick={() => navigate('/', { replace: true })}
         />,
       ]}

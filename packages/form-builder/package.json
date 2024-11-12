@@ -1,0 +1,14 @@
+{
+  "name": "@packages/form-builder",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitee.com:shanghai-mingqi-network/huishi-listening-fe.git"
+  },
+  "private": true
+}
