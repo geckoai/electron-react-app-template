@@ -66,7 +66,7 @@
   "devDependencies": {
     "@types/node": "20.16.5",
     "@crowdin/cli": "^3.19.4",
-    "@geckoai/electron-react-scripts": "1.0.13",
+    "@geckoai/electron-react-scripts": "1.0.20-beta4",
     "@types/crypto-js": "^4.2.2",
     "@types/react": "^18.2.70",
     "@types/react-dom": "^18.2.22",
@@ -83,7 +83,7 @@
     "buffer": "6.0.3"
   },
   "dependencies": {
-    "@geckoai/class-transformer": "^1.0.0",
+    "@geckoai/class-transformer": "^1.0.2",
     "@packages/i18n": "workspace:*",
     "@packages/router": "workspace:*",
     "@packages/components": "workspace:*",
