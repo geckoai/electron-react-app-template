@@ -16,8 +16,5 @@
   "EDIT":"修改",
   "CONFIRM_APP_SECRET": "确认要生成App Secret吗?",
    "DESCRIPTION": "描述",
-  "SUCCESS":"成功",
-  "CUSTOMER_SERVICE": "联系客服",
-  "RE_LOGIN": "重新登录",
-  "VIEW_ERROR_MESSAGE": "查看错误信息"
+  "SUCCESS":"成功"
 }

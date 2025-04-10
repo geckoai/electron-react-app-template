@@ -11,8 +11,8 @@
     "url": "https://github.com/geckoai/react-app-template.git"
   },
   "dependencies": {
-    "@geckoai/class-transformer": "^1.0.0",
-    "@geckoai/http": "1.0.4",
+    "@geckoai/class-transformer": "^1.0.2",
+    "@geckoai/http": "2.0.1",
     "@geckoai/i18n": "^1.0.0",
     "crypto-js": "^4.2.0",
     "antd": "5.19.3",

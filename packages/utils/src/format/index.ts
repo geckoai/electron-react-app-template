@@ -22,10 +22,14 @@ export class Format {
    */
   public static hms(v: number) {
     if (!isNaN(v)) {
+      //   const s = v % 60;
+      //   const mCount = (v - s) / 60;
+      //   const m = mCount % 60;
+      //   const h = mCount - m;
       const s = v % 60;
-      const mCount = (v - s) / 60;
+      const mCount = Math.floor(v / 60);
       const m = mCount % 60;
-      const h = mCount - m;
+      const h = Math.floor(mCount / 60);
 
       if (h) {
         return [
