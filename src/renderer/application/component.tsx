@@ -6,8 +6,6 @@ import i18n from '@packages/i18n';
 import { ApplicationStoreState } from './application.store';
 import { I18nProvider } from '@packages/i18n';
 
-//sads
-
 // rem 方案代码
 // import { StyleProvider, px2remTransformer } from '@ant-design/cssinjs';
 // const px2rem = px2remTransformer({
