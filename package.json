@@ -2,7 +2,7 @@
   "name": "electron-react-template",
   "version": "1.0.0",
   "description": "",
-  "main": "build/web/main/main.js",
+  "main": "build/web/main/index.js",
   "scripts": {
     "start": "electron-react-scripts start",
     "swagger": "electron-react-scripts swagger-generator",
