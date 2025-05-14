@@ -25,7 +25,8 @@ export default defineConfig([
     files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'],
     rules: {
       "@typescript-eslint/no-unsafe-function-type": "off",
-      "@typescript-eslint/no-require-imports": "off"
+      "@typescript-eslint/no-require-imports": "off",
+      "@typescript-eslint/no-explicit-any": "off"
     }
   }
 ]);
