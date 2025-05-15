@@ -1,8 +1,9 @@
-import { GeckoRoute } from '@geckoai/router';
+import { GeckoRouteModule } from '@geckoai/gecko-router';
 import { Component } from './component';
 
-@GeckoRoute({
+@GeckoRouteModule({
   index: true,
-  Component,
+  Component
 })
-export class HomeModule {}
+export class HomeModule {
+}

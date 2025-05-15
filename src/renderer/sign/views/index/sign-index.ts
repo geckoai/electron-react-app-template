@@ -1,10 +1,9 @@
-import { GeckoRoute } from '@geckoai/router';
+import { GeckoRouteModule } from '@geckoai/gecko-router';
 import { Component } from './component';
-import { GeckoModule } from '@geckoai/core';
 
-@GeckoRoute({
+@GeckoRouteModule({
   index: true,
   Component
 })
-@GeckoModule
-export class SignIndex {}
+export class SignIndex {
+}

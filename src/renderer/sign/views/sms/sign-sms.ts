@@ -1,10 +1,9 @@
-import { GeckoRoute } from '@geckoai/router';
+import { GeckoRouteModule } from '@geckoai/gecko-router';
 import { Component } from './component';
-import { GeckoModule } from '@geckoai/core';
 
-@GeckoRoute({
+@GeckoRouteModule({
   path: 'sms',
-  Component,
+  Component
 })
-@GeckoModule
-export class SignSms {}
+export class SignSms {
+}

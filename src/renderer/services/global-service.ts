@@ -1,4 +1,4 @@
-import { injectable } from '@geckoai/core';
+import { injectable } from '@geckoai/gecko-core';
 
 @injectable()
 export class GlobalService {
