@@ -1,7 +1,7 @@
-import { GeckoRouteModule } from '@geckoai/gecko-router';
+import { Route } from '@geckoai/gecko-router';
 import { Component } from './component';
 
-@GeckoRouteModule({
+@Route({
   path: 'sms',
   Component
 })

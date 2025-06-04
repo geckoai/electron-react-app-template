@@ -1,9 +1,8 @@
-import { GeckoRouteModule } from '@geckoai/gecko-router';
+import { Route } from '@geckoai/gecko-router';
 import { Component } from './component';
 
-@GeckoRouteModule({
+@Route({
   index: true,
   Component
 })
-export class SignIndex {
-}
+export class SignIndex {}

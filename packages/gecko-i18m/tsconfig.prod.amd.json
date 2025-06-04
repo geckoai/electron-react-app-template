@@ -1,8 +1,0 @@
-{
-  "extends": "./tsconfig.prod.json",
-  "compilerOptions": {
-    "module": "AMD",
-    "target": "ES5",
-    "outDir": "dist/amd"
-  },
-}
