@@ -4,6 +4,10 @@ import globals from 'globals';
 import tseslint from 'typescript-eslint';
 import pluginReact from 'eslint-plugin-react';
 import css from '@eslint/css';
+import eslintPluginPrettier from 'eslint-plugin-prettier';
+
+import { rules as configPrettierRules } from 'eslint-config-prettier';
+import { rules as configPrettierOverridesRules } from 'eslint-config-prettier/prettier';
 
 export default defineConfig([
   { files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'], plugins: { js }, extends: ['js/recommended'] },
@@ -21,7 +25,22 @@ export default defineConfig([
   },
   {
     files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'],
+    plugins: {
+      prettier: eslintPluginPrettier,
+    },
     rules: {
+      ...configPrettierRules,
+      ...configPrettierOverridesRules,
+      'prettier/prettier': [
+        'error',
+        {
+          singleQuote: true,
+          endOfLine: 'auto',
+        },
+        {
+          usePrettierrc: false,
+        },
+      ],
       "@typescript-eslint/no-unsafe-function-type": "off",
       "@typescript-eslint/no-require-imports": "off"
     }
