@@ -8,7 +8,7 @@ export const Component = () => {
     <div>
       {i18n?.Home}
       <div>
-        <button type="button" onClick={() => service.current.next('zh_CN')}>
+        <button type="button" onClick={() => service.current.next('zh-CN')}>
           中文
         </button>
         <button type="button" onClick={() => service.current.next('en')}>
