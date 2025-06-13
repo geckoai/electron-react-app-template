@@ -1,5 +1,5 @@
 const path = require('path');
-const URI = 'https://accountdev.mingqi-tech.cn/';
+const URI = process.env.API_URL;
 // const px2rem = require('postcss-pxtorem');
 
 module.exports = {
@@ -59,7 +59,7 @@ module.exports = {
        * StylelintWebpackPlugin options
        * see: https://webpack.js.org/plugins/stylelint-webpack-plugin/#options
        */
-      lint: null
+      lint: null,
     },
     /**
      * babel-loader options
@@ -79,7 +79,6 @@ module.exports = {
     // DevServer see: https://webpack.js.org/configuration/dev-server
     devServer: {
       compress: true,
-      port: 3012,
       proxy: {
         '/api': {
           target: URI,
@@ -180,28 +179,9 @@ module.exports = {
      * see: https://github.com/TypeStrong/ts-loader
      */
     babel: {},
-    alias: {}
+    alias: {},
   },
   alias: {
     '@packages': path.resolve('packages'),
   },
-  // swagger生成器配置
-  swaggers: [
-    // {
-    //   url: `${URI}/api/user-service/v2/api-docs`,
-    //   outputs: [
-    //     {
-    //       dest: path.resolve('apis', 'user-service'),
-    //       dtos: [
-    //         {
-    //           path: '/license/list/pageable',
-    //           method: 'get',
-    //           name: 'LicenseListPageable',
-    //         },
-    //       ],
-    //       vos: [{ name: 'SysLicenseVo', target: 'SysLicenseVo' }],
-    //     },
-    //   ],
-    // },
-  ],
 };

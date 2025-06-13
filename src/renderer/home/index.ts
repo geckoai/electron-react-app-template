@@ -1,15 +1,15 @@
-import { Fallback, FallbackNode, Route } from '@geckoai/gecko-router';
+import { Fallback, Route, RouteModuleLifeCycle } from '@geckoai/platform-react';
 import { Component } from './component';
-import { GeckoI18n, I18nMap } from '@geckoai/gecko-i18n';
 import { locales } from './locales';
-import { GeckoModule } from '@geckoai/gecko-core';
+import { I18nMap, I18nReact } from '@geckoai/i18n-react';
+import { Module } from '@geckoai/gecko-core';
+import { Skeleton } from './skeleton';
 
-@I18nMap(locales)
 @Route({
   index: true,
-  Component
+  Component,
 })
-@Fallback(FallbackNode)
-@GeckoModule({ imports: [GeckoI18n] })
-export class HomeModule {
-}
+@I18nMap(locales)
+@Fallback(Skeleton)
+@Module({ imports: [I18nReact] })
+export class HomeModule extends RouteModuleLifeCycle {}

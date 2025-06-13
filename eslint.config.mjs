@@ -10,18 +10,30 @@ import { rules as configPrettierRules } from 'eslint-config-prettier';
 import { rules as configPrettierOverridesRules } from 'eslint-config-prettier/prettier';
 
 export default defineConfig([
-  { files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'], plugins: { js }, extends: ['js/recommended'] },
-  { files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'], languageOptions: { globals: globals.browser }, },
+  {
+    files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'],
+    plugins: { js },
+    extends: ['js/recommended'],
+  },
+  {
+    files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'],
+    languageOptions: { globals: globals.browser },
+  },
   tseslint.configs.recommended,
   pluginReact.configs.flat.recommended,
-  { files: ['**/*.css'], plugins: { css }, language: 'css/css', extends: ['css/recommended'] },
+  {
+    files: ['**/*.css'],
+    plugins: { css },
+    language: 'css/css',
+    extends: ['css/recommended'],
+  },
   {
     files: ['**/*.{jsx,tsx}'],
     rules: {
       'react/react-in-jsx-scope': 'off',
-      "react/no-children-prop": "off",
-      "@typescript-eslint/no-require-imports": "off"
-    }
+      'react/no-children-prop': 'off',
+      '@typescript-eslint/no-require-imports': 'off',
+    },
   },
   {
     files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'],
@@ -41,8 +53,8 @@ export default defineConfig([
           usePrettierrc: false,
         },
       ],
-      "@typescript-eslint/no-unsafe-function-type": "off",
-      "@typescript-eslint/no-require-imports": "off"
-    }
-  }
+      '@typescript-eslint/no-unsafe-function-type': 'off',
+      '@typescript-eslint/no-require-imports': 'off',
+    },
+  },
 ]);

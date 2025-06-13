@@ -87,8 +87,8 @@
   "dependencies": {
     "@geckoai/class-transformer": "1.0.2",
     "@geckoai/gecko-core": "^1.0.0",
-    "@geckoai/gecko-router": "^1.0.0",
-    "@geckoai/gecko-i18n": "^1.0.0",
+    "@geckoai/platform-react": "^1.0.0",
+    "@geckoai/i18n-react": "^1.0.0",
     "crypto-js": "^4.2.0",
     "normalize.css": "^8.0.1",
     "react": "^19.1.0",
